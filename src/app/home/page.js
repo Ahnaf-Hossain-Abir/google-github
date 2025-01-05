@@ -8,7 +8,10 @@ const homePage = async() => {
    if(!session?.user) redirect("/")
     return (
         <div className="flex flex-col gap-4 items-center m-4">
-            <h1 className="text-3xl"><span className="font-bold">Welcome</span>, {session.user.name}</h1>
+        {
+            session.user.image && session.user.name ? (
+                <>
+                <h1 className="text-3xl"><span className="font-bold">Welcome</span>, {session.user.name}</h1>
             <Image
                 src={session.user.image}
                 alt={session.user.name}
@@ -16,6 +19,12 @@ const homePage = async() => {
                 height={100}
                 className="rounded-full"
             />
+                </>
+            ) : (
+                <h1 className="text-3xl"><span className="font-bold">Welcome</span>, {session.user.email}</h1>
+            )
+        }
+            
             <Logout/>
         </div>
     );
